@@ -12,6 +12,8 @@ function pluralize(singular, plural, quantity)  {
 console.log(pluralize("goose", "geese", 1));
 ```
 
+---
+
 # New JS
 
 ```javascript
@@ -25,6 +27,8 @@ var pluralize = (singular, plural, quantity) =>  {
 
 console.log(pluralize("goose", "geese", 7));
 ```
+
+---
 
 # First Elm
 
@@ -41,6 +45,8 @@ main =
   text (pluralize "goose" "geese" 1)
 ```
 
+---
+
 # JS Typo
 
 ```javascript
@@ -55,7 +61,11 @@ var pluralize = (singular, plural, quantity) =>  {
 console.log(pluralize("goose", "geese", 7));
 ```
 
+???
+
 Then try this in Elm.....cannot do it. In JS we get a runtime error. The bug sits there waiting, like a time bomb until that particular line of code is run, then 💥
+
+---
 
 # JS Type Error
 
@@ -71,7 +81,11 @@ var pluralize = (singular, plural, quantity) =>  {
 console.log(pluralize("goose", "geese", "1")); // <-- WRONG TYPE
 ```
 
+???
+
 No error at all this time, even at runtime. Your program is just wrong.
+
+---
 
 # Type Error in Elm
 
@@ -87,3 +101,7 @@ pluralize singular plural quantity =
 main =
   text (pluralize "goose" "geese" "1")
 ```
+
+???
+
+Elm checks your entire program for integrity before it's ever run.
