@@ -17,26 +17,25 @@ displayText model =
 
 
 main =
-    beginnerProgram { model = 1, view = view, update = update }
+    beginnerProgram
+        { model = 1
+        , view = view
+        , update = update
+        }
 
 
 view model =
     div []
-        [ button [ onClick Decrement ] [ text "-" ]
+        [ button [ onClick "decrement" ] [ text "-" ]
         , div [] [ text (displayText model) ]
-        , button [ onClick Increment ] [ text "+" ]
+        , button [ onClick "increment" ] [ text "+" ]
         ]
 
 
-type Msg
-    = Increment
-    | Decrement
-
-
 update msg model =
-    case msg of
-        Increment ->
-            model + 1
-
-        Decrement ->
-            model - 1
+    if msg == "increment" then
+        model + 1
+    else if msg == "decrement" then
+        model - 1
+    else
+        model

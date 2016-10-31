@@ -7,34 +7,30 @@ import Html.Lazy exposing (lazy)
 import Random
 
 
-type alias Model =
-    { face : Int }
-
-
 type Msg
     = Roll
     | NewFace Int
 
 
-init : ( Model, Cmd Msg )
+init : ( Int, Cmd Msg )
 init =
-    ( { face = 1 }, Cmd.none )
+    ( 1, Cmd.none )
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Int -> ( Int, Cmd Msg )
 update msg model =
     case msg of
         Roll ->
             ( model, Random.generate NewFace (Random.int 1 6) )
 
         NewFace num ->
-            ( { model | face = num }, Cmd.none )
+            ( num, Cmd.none )
 
 
-view : Model -> Html Msg
+view : Int -> Html Msg
 view model =
     div []
-        [ h1 [] [ text (toString model.face) ]
+        [ h1 [] [ text (toString model) ]
         , button [ onClick Roll ] [ text "Roll" ]
         ]
 
