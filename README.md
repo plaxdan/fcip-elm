@@ -1,6 +1,5 @@
 ---
 title: An Exploration of Elm
-theme: css/theme/solarized.css
 revealOptions:
     transition: 'fade'
 ---
@@ -300,13 +299,6 @@ Note: wasteful, but easy to reason about
 
 ---
 
-1. Change wanted
-1. Scrap the old
-1. Create the new
-1. ...goto step 1.
-
----
-
 # You can do this with the DOM
 
 ---
@@ -382,15 +374,6 @@ Note: wasteful, but easy to reason about
 ## Each box has it's own state
 
 ![Imgur](http://i.imgur.com/fGi5nho.jpg)
-
----
-
-## Like good, OO Programmers
-
-- our component state is _mutable_
-- so we encapsulate it
-- and provide "setter" or callback functions
-- so others can modify a portion of our state
 
 ---
 
@@ -504,9 +487,7 @@ render() {
 
 ```javascript
 propTypes: {
-  inventory: React.PropTypes.shape(
-    {items: React.PropTypes.arrayOf(React.PropTypes.object)}
-  ).isRequired
+  inventory: React.PropTypes.object.isRequired
 }
 ...
 render() {
@@ -514,7 +495,8 @@ render() {
     return (
       <div>
         this.props.inventory.map(x => {
-          return <InventoryItem item={x}/> });
+          return <InventoryItem item={x}/>
+        });
       </div>
     );
   } else {
