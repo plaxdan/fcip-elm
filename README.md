@@ -17,6 +17,8 @@ revealOptions:
 
 ---
 
+<!-- .slide: data-background="hotpink" -->
+<!-- .slide: data-transition="default" -->
 # Part 1 - Convergence
 
 Note: our programs consist of a combination of state and behavior
@@ -35,10 +37,6 @@ Note: our programs consist of a combination of state and behavior
 
 
 Note: The way that state, logic, and side-effects are managed in web applications has evolved significantly during my time as a developer.
-
----
-
-## Convergence on a few ideas
 
 ---
 
@@ -332,15 +330,9 @@ Note: wasteful, but easy to reason about
 
 ---
 
+# We nest the boxes
+
 ![Imgur](http://i.imgur.com/leg2fVU.png)
-
----
-
-# data ✅
-
-# function(data) ✅
-
-# dom ❓
 
 ---
 
@@ -549,3 +541,25 @@ render() {
 | Multi-directional data flow  | Uni-directional data flow  |
 | Mutable shared state  | Immutable shared state  |
 | No type checking  | Type checking UI props  |
+
+---
+
+## ✅ Part 1 - Convergence
+## Part 2 - Intro to Elm
+## Part 3 - Why Elm is Different
+## Part 4 - Working With Types
+## Part 5 - Up and Running
+
+---
+
+<!-- .slide: data-transition="default" -->
+<!-- .slide: data-background="hotpink" -->
+# Part 2 - Intro to Elm
+
+---
+
+![Imgur](http://i.imgur.com/q25B2pt.png)
+
+---
+
+![Imgur](http://xahlee.info/UnixResource_dir/gki/elm_logo.png)
