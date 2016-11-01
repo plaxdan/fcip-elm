@@ -13,7 +13,7 @@ revealOptions:
 ## Part 1 - Background
 ### Part 2 - Intro to Elm
 ### Part 3 - Why Elm is Different
-### Part 4 - Working With Types
+### Part 4 - Type System
 ### Part 5 - Up and Running
 
 Note: our programs consist of a combination of state and behavior
@@ -531,7 +531,7 @@ render() {
 ### Part 1 - Background
 ## Part 2 - Intro to Elm
 ### Part 3 - Why Elm is Different
-### Part 4 - Working With Types
+### Part 4 - Type System
 ### Part 5 - Up and Running
 
 ---
@@ -747,7 +747,11 @@ Functions are auto-curried.
 > divide x y =
     x / y
 <function> : Float -> Float -> Float
+```
 
+---
+
+```elm
 > divideTwelve = divide 12
 <function> : Float -> Float
 
@@ -881,13 +885,15 @@ The **good practices** that we're seeing convergence on in JS land, are inescapa
 
 ---
 
-| 💥 Early JS | Recent JS  | Elm
+TODO: maybe kill?
+
+| 💥 Early JS | Recent JS  | React | Elm
 |---|---|---|
-| Mutating the DOM manually   | Virtual DOM  | ✅  Fastest available [elm-lang.org/blog](http://elm-lang.org/blog) |
-| State was spread out   | Now it's centralized  | ✅ Elm architecture |
-| Multi-directional data flow  | Uni-directional data flow | ✅  Elm architecture |
-| Mutable shared state  | Immutable shared state  | ✅ Immutable |
-| Silent type errors  | Type checking UI props  | ✅ Strongly Typed
+| Mutating the DOM manually   | Virtual DOM  | React |  Elm |
+| State was spread out   | Now it's centralized  | Redux | Elm |
+| Multi-directional data flow  | Uni-directional data flow | Redux |  Elm |
+| Mutable shared state  | Immutable shared state  | Immutable.js | Elm |
+| Silent type errors  | Type checking UI props  | PropTypes/Flow | Elm
 
 ---
 
@@ -904,7 +910,7 @@ JS Frameworks are now Emulating Elm
 ### Part 1 - Background
 ### Part 2 - Intro to Elm
 ## Part 3 - Why Elm is Different
-### Part 4 - Working With Types
+### Part 4 - Type System
 ### Part 5 - Up and Running
 
 ---
@@ -970,38 +976,23 @@ So what makes a language functional?
 
 ---
 
-### Take 1...
+### Kris Jenkins:
 
-> A functional programming language is one that supports and encourages programming without side-effects.
-
----
-
-### Or more specifically...
-
-> A functional language actively helps you eliminate side-effects wherever possible, and tightly control them wherever it's not.
-
----
-
-### Or more dramatically...
-
-> A functional language is **actively hostile** to side-effects. Side-effects are **complexity** and complexity is **bugs** and bugs are **evil**. A functional language will **help you** be hostile to side-effects. Together you will beat them into submission.
+> "Functional Programming is about **eliminating side effects** where you can and **controlling them** where you can’t, and that will lead you on a very interesting journey."
 
 ---
 
 ### Kris Jenkins:
-
-> "Functional Programming is about **eliminating side effects** where you can and **controlling them** where you can’t, and that will lead you on a very interesting journey.""
-
----
-
 > "It is my deep hope that in the morning, you will go to your computer, and you will see side-effects everywhere."
 
 ---
 
+### Kris Jenkins:
 > "And it will ruin your lives, and torture you for years..."
 
 ---
 
+### Kris Jenkins:
 > "...and it will also make you a much better programmer." - [@krisajenkins](https://twitter.com/krisajenkins)
 
 ---
@@ -1065,14 +1056,6 @@ Virtual DOM is an
 
 ---
 
-### Part 1 - Background
-### Part 2 - Intro to Elm
-## Part 3 - Why Elm is Different
-### Part 4 - Working With Types
-### Part 5 - Up and Running
-
----
-
 Elm is an
 # Effect Manager
 ...for **EVERYTHING**
@@ -1132,21 +1115,13 @@ Elm is an
 Pure functions describe these effects
 ## as data
 
-```elm
-getRandomGif : String -> Cmd Msg
-getRandomGif topic =
-  -- ...
-```
-
-http://elm-lang.org/examples/http
-
 ---
 
 Something produces a **`Cmd`**...
 
 ![Imgur](http://i.imgur.com/OdGdsdj.png)
 
-...returns a **`Msg`**
+...Elm returns a **`Msg`**
 
 ---
 
@@ -1190,7 +1165,7 @@ You ask for these things with a **`Cmd`**...
 
 ![Imgur](http://i.imgur.com/OdGdsdj.png)
 
-...returns them in a **`Msg`**
+...Elm returns them to you in a **`Msg`**
 
 ---
 
@@ -1202,15 +1177,587 @@ Or we move **complex** things (your entire codebase) to **uncontrolled** environ
 
 ---
 
+This is the **major difference** between Elm and its competitors...
+
+- All functions are pure
+- All side effects are controlled
+
+---
+
+That means asynchronous and side-effectful functions are:
+- easily understood (and usually smaller)
+- easily identified by their return type: `Cmd`
+- easily testable (data in, data out, no mocking)
+
+---
+
+This is a huge benefit for **maintanability**.
+
+---
+
 <!-- .slide: data-transition="default" -->
 <!-- .slide: data-background="#FBB917" -->
 ### Part 1 - Background
 ### Part 2 - Intro to Elm
 ### Part 3 - Why Elm is Different
-## Part 4 - Working With Types
+## Part 4 - Type System
 ### Part 5 - Up and Running
 
+---
 
+Elm **lifts** side effects into its type system.
+
+**`Cmd`**
+
+---
+
+But there are many other hazards for our programs...
+
+---
+
+But there are many other hazards for our programs...
+
+### Null / undefined
+
+---
+
+But there are many other hazards for our programs...
+
+### Null / undefined
+### Exceptions
+
+---
+
+But there are many other hazards for our programs...
+
+### Null / undefined
+### Exceptions
+### Invariants
+
+---
+
+As you probably guessed, these are also handled by the type system.
+
+---
+
+"Algebraic data types"
+
+"Discriminated union types"
+
+"Union types"
+
+---
+
+Similar concept to an `enum` that you might have seen in other languages.
+
+---
+
+## Example
+
+```elm
+type Bool   -- type
+  = True    -- constructor or 'case'
+  | False   -- constructor or 'case'
+```
+
+**NOT** a constructor in the OO sense. These are values, and the compiler will enforce that all possible cases of a union type are handled in your code.
+
+---
+
+Create your own for modeling your data...
+
+```elm
+type GamePhase
+  = Ready
+  | InProgress
+  | Won
+  | Lost
+```
+
+_(we'll get back to this when we talk about 'invariants')_
+
+---
+
+## Null / undefined
+
+![Imgur](http://i.imgur.com/SaT3FH7.png)
+
+---
+
+![Imgur](http://i.imgur.com/ixqA7lP.png)
+
+---
+
+```elm
+List.head ["Alice", "Bob", "Eve"]
+> ...?
+
+List.head []
+> ...?
+```
+
+Let's try....
+
+---
+
+`Maybe` is a union type...
+
+```elm
+type Maybe a
+    = Just a
+    | Nothing
+```
+
+Represents values that may or may not exist.
+
+---
+
+The compiler forces you to handle each case...
+
+```elm
+names = ["Alice", "Bob", "Eve"]
+first = List.head names
+
+case first of
+  Nothing
+    -- ... the list was empty
+
+  Just value ->
+    -- ... succeed with value
+```
+
+Sometimes you just provide a default...
+
+```elm
+names = ["Alice", "Bob", "Eve"]
+first = Maybe.withDefault "NONE" (List.head names)
+```
+
+---
+
+Use **`Maybe`** in your data models:
+
+```elm
+type alias PersonName =
+    { first : String        -- required
+    , middle : Maybe String -- optional
+    , last : String         -- required
+    }
+```
+
+---
+
+If a **`Maybe`** is not handled, your code **will not compile**.
+
+http://package.elm-lang.org/packages/elm-lang/core/latest/Maybe
+
+---
+
+An **entire category** of
+# Future bugs
+
+![Sarah Connor](http://i.imgur.com/JNTncdq.png)
+
+...is wiped from existence.
+
+---
+
+### ✅ Null / undefined
+### Exceptions
+### Invariants
+
+---
+
+## Exceptions
+
+![Imgur](http://i.imgur.com/xFMWnZF.png)
+
+---
+
+Exceptions are **lifted** into the type system just like **side effects** and **nulls**.
+
+---
+
+`Result error value`
+
+```elm
+type Result error value
+    = Ok value
+    | Err error
+```
+
+A `Result` is either `Ok` meaning the computation succeeded, or it is an `Err` meaning that there was some failure.
+
+---
+
+The Elm compiler will ensure `Result` is used for any operation that might fail.
+
+- conversions
+- accessing http
+- accessing storage
+- etc...
+
+---
+
+```elm
+numberString = "1664"
+result = String.toInt numberString
+
+case result of
+  Err msg ->
+    -- ... fail with message
+
+  Ok value ->
+    -- ... succeed with value
+```
+
+Again, you can provide a default...
+
+```elm
+numberString = "This ain't right"
+result = Result.withDefault 0 (String.toInt numberString)
+
+-- alternate syntax using the backwards pipe (fewer parens)
+result = Result.withDefault 0 <| String.toInt numberString
+
+-- alternate syntax using forwards pipe
+result =
+  numberString
+    |> String.toInt
+    |> Maybe.withDefault 0
+```
+
+---
+
+Say goodbye to **runtime exceptions**...
+
+![Sarah Connor](http://i.imgur.com/JNTncdq.png)
+
+---
+
+### ✅ Null / undefined
+### ✅ Exceptions
+### Invariants
+
+So what is an invariant anyway?
+
+---
+
+**Quesion:** What kind of person would model a light bulb like this?
+
+```javascript
+
+// JavaScript model of a light bulb...
+
+var bulb = {
+  on: true,
+  off: false
+}
+```
+
+---
+
+**Answer**: Only a maniac.
+
+```javascript
+var bulb = {
+  on: true,
+  off: true
+}
+```
+
+It's only a matter of time before we get into an illegal state.
+
+---
+
+This is a silly example
+of an
+
+## invariant
+
+---
+
+Just like with **Kris Jenkins'** side effects,
+### once you start looking
+you will notice **invariants**
+### all over your code
+
+---
+
+We start with a simple model for a Contact
+
+```elm
+type alias Contact =
+    { name : String
+    , email : String
+    , address : String
+    }
+```
+
+---
+
+Then you learn that email and address are optional, but the a Contact must have at least one contact method.
+
+```elm
+type alias Contact =
+    { name : String
+    , email : String
+    , address : String
+    }
+```
+
+---
+
+We could make `Maybe` to make them both optional...
+
+```elm
+type alias Contact =
+    { name : String
+    , email : Maybe String
+    , address : Maybe String
+    }
+```
+
+---
+
+But it's still possible to create a Contact in an invalid state:
+
+```elm
+-- we're supposed to have at least one contact method...
+dude =
+  { name = "Jeffrey Lebowski"
+  , email = Nothing
+  , address = Nothing
+  }
+```
+
+---
+
+Valid Option 1
+
+```elm
+type ContactMethod
+    = EmailOnly String
+    | AddressOnly String
+    | EmailAndAddress (String, String) -- we use a Tuple
+```
+
+```elm
+type alias Contact =
+    { name : String
+    , contactMethod : ContactMethod
+    }
+```
+
+---
+
+Try it out...
+
+```elm
+dude =
+  { name = "Jeffrey Lebowski"
+  , contactMethod = EmailOnly "el_duderino@yahoo.com"
+  }
+```
+
+```elm
+dude =
+  { name = "Jeffrey Lebowski"
+  , contactMethod = AddressOnly "11304 Malibu Heights"
+  }
+```
+
+```elm
+dude =
+  { name = "Jeffrey Lebowski"
+  , contactMethod =
+      EmailAndAddress ("el_duderino@yahoo.com", "11304 Malibu Heights")
+  }
+```
+
+---
+
+Valid Option 2
+
+```elm
+type ContactMethod
+  = Email String
+  | Address String
+
+type alias Contact =
+  { name : String
+  , primaryContact : ContactMethod
+  , secondaryContact : Maybe ContactMethod
+  }
+```
+
+---
+
+Let's try it out...
+
+```elm
+dude =
+  { name = "Jeffrey Lebowski"
+  , primaryContact = Email "el_duderino@yahoo.com"
+  , secondaryContact = Nothing
+  }
+```
+
+```elm
+dude =
+  { name = "Jeffrey Lebowski"
+  , primaryContact = Address "11304 Malibu Heights"
+  , secondaryContact = Nothing
+  }
+```
+
+```elm
+dude =
+  { name = "Jeffrey Lebowski"
+  , primaryContact = Email "el_duderino@yahoo.com"
+  , secondaryContact = Just "11304 Malibu Heights"
+  }
+```
+
+---
+
+Option 3
+
+```elm
+type ContactMethod
+  = Email String
+  | Address String
+```
+
+```elm
+type alias Contact =
+  { name : String
+  , contactMethod : ContactMethod
+  , alternateContactMethods : List ContactMethod
+  }
+```
+
+---
+
+With our first model, we had to rely on
+
+```elm
+type alias Contact =
+    { name : String
+    , email : Maybe String
+    , address : Maybe String
+    }
+-- it's possible for email and address to both be Nothing
+```
+
+### Programmer Correctness
+
+---
+
+### We could live with this.
+
+---
+
+### We could live with this.
+### Most of us **do** live with this.
+
+---
+
+### We could live with this.
+### Most of us **do** live with this.
+### We just communicate the rules to everyone.
+
+---
+
+### We could live with this.
+### Most of us **do** live with this.
+### We just communicate the rules to everyone.
+### Remember to tell the new guy.
+
+---
+
+### We could live with this.
+### Most of us **do** live with this.
+### We just communicate the rules to everyone.
+### Remember to tell the new guy.
+### Maybe write some sweet comments in our code.
+
+---
+
+### We could live with this.
+### Most of us **do** live with this.
+### We just communicate the rules to everyone.
+### Remember to tell the new guy.
+### Maybe write some sweet comments in our code.
+### We might even write tests!
+
+---
+
+### ~~We could live with this.~~
+### ~~Most of us **do** live with this.~~
+### ~~We just communicate the rules to everyone.~~
+### ~~Remember to tell the new guy.~~
+### ~~Maybe write some sweet comments in our code.~~
+### ~~We might even write tests!~~
+
+---
+
+**type system** + **compiler** help make **invariants**
+
+![Sarah Connor](http://i.imgur.com/JNTncdq.png)
+
+# impossible
+
+---
+
+### ✅ Null / undefined
+### ✅ Exceptions
+### Invariants
+
+---
+
+
+| 💥 | ✅ |
+| --- | --- |
+| null / undefined | `Maybe a` |
+| exceptions | `Result error value` |
+| invariants | types + compiler |
+| side effects | `Cmd msg` |
+| mutable shared state | all data immutable |
+| mutating the dom manually | virtual dom |
+| state was spread out   | centralized state  |
+| multidirectional data flow  | unidirectional data flow  |
+| silent type errors  | strong type system  |
+
+---
+
+<!-- .slide: data-background="#FBB917" -->
+<!-- .slide: data-transition="default" -->
+### Part 1 - Background
+### Part 2 - Intro to Elm
+### Part 3 - Why Elm is Different
+### Part 4 - Type System
+## Part 5 - Up and Running
+
+---
+
+TODO:
+
+Installing and getting going
+- `npm i -g elm`
+- `mkdir my-proj && cd py-proj`
+- `elm package install`
+- `atom Main.elm`
+
+Elm package manager
+- enforced semantic versioning
+- diff versions
+
+Elm packages
+
+Timeline (compared to python)
+
+.....
 
 ---
 
@@ -1236,4 +1783,4 @@ Or we move **complex** things (your entire codebase) to **uncontrolled** environ
 <!-- .slide: data-transition="default" -->
 # Links
 
-TODO
+I'll be adding these soon.....
