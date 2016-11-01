@@ -1,5 +1,5 @@
 ---
-title: An Exploration of Elm
+title: FCIP - Elm
 revealOptions:
     transition: 'fade'
 ---
@@ -1477,14 +1477,87 @@ of an
 
 ---
 
-Just like with **Kris Jenkins'** side effects,
-### once you start looking
-you will notice **invariants**
-### all over your code
+Another Example
+
+```elm
+type ConnectionState
+  = Connecting
+  | Connected
+  | Disconnected
+
+type alias ConnectionInfo =
+  { state : ConnectionState
+  , serverAddress : String
+  , lastPingTime : Maybe Time
+  , lastPingId : Maybe Int
+  , sessionId : Maybe String
+  , whenInitiated : Maybe Time
+  , whenDisconnected : Maybe Time
+  }
+```
 
 ---
 
-We start with a simple model for a Contact
+### Invariants
+
+- if you have a `lastPingTime`, you should also have a `lastPingId`
+- if you don’t have a `lastPingTime`, you should not have a `lastPingId`
+- you should only have a `sessionId` when you’re connected
+- `whenInitiated` - only makes sense to keep that if you’re in the process of connecting (used for retries)
+- `whenDisconnected` - only makes sense if you’re disconnected
+
+---
+
+There’s nothing about this type, that helps you in enforcing the invariants.
+
+```elm
+type ConnectionState
+  = Connecting
+  | Connected
+  | Disconnected
+
+type alias ConnectionInfo =
+  { state : ConnectionState
+  , serverAddress : String
+  , lastPingTime : Maybe Time
+  , lastPingId : Maybe Int
+  , sessionId : Maybe String
+  , whenInitiated : Maybe Time
+  , whenDisconnected : Maybe Time
+  }
+```
+
+---
+
+No illegal states!
+
+```elm
+type ConnectionState
+  = Connecting Time              -- initiation time
+  | Connected String (Int, Time) -- lastPingId, lastPingTime
+  | Disconnected Time            -- disconnection time
+
+type alias ConnectionInfo =
+  { state : ConnectionState -- Connecting | Connected | Disconnected
+  , serverAddress : String
+  }
+```
+
+1. Server address should exist regardless of connection state
+1. Segregated the values for individual cases:
+  - Connecting - when initiated
+  - Disconnected - when disconnected
+  - Connected - ping time, ping ID bound together in a tuple
+
+---
+
+When you start looking you start to
+### notice **invariants**
+all over your code
+
+---
+
+Simple model for a Contact
 
 ```elm
 type alias Contact =
@@ -1496,7 +1569,9 @@ type alias Contact =
 
 ---
 
-Then you learn that email and address are optional, but the a Contact must have at least one contact method.
+### New requirements
+- Email and address are now optional
+- But a Contact must have **at least one contact method**
 
 ```elm
 type alias Contact =
@@ -1523,12 +1598,12 @@ type alias Contact =
 But it's still possible to create a Contact in an invalid state:
 
 ```elm
--- we're supposed to have at least one contact method...
 dude =
   { name = "Jeffrey Lebowski"
   , email = Nothing
   , address = Nothing
   }
+-- we're supposed to have at least one contact method...
 ```
 
 ---
@@ -1640,6 +1715,7 @@ type alias Contact =
 ---
 
 With our first model, we had to rely on
+### Programmer Correctness
 
 ```elm
 type alias Contact =
@@ -1650,8 +1726,6 @@ type alias Contact =
 -- it's possible for email and address to both be Nothing
 ```
 
-### Programmer Correctness
-
 ---
 
 ### We could live with this.
@@ -1659,62 +1733,69 @@ type alias Contact =
 ---
 
 ### We could live with this.
-### Most of us **do** live with this.
+### Most of us do live with this.
 
 ---
 
 ### We could live with this.
-### Most of us **do** live with this.
+### Most of us do live with this.
 ### We just communicate the rules to everyone.
 
 ---
 
 ### We could live with this.
-### Most of us **do** live with this.
+### Most of us do live with this.
 ### We just communicate the rules to everyone.
 ### Remember to tell the new guy.
 
 ---
 
 ### We could live with this.
-### Most of us **do** live with this.
+### Most of us do live with this.
 ### We just communicate the rules to everyone.
 ### Remember to tell the new guy.
-### Maybe write some sweet comments in our code.
+### Maybe write some comments in our code.
 
 ---
 
 ### We could live with this.
-### Most of us **do** live with this.
+### Most of us do live with this.
 ### We just communicate the rules to everyone.
 ### Remember to tell the new guy.
-### Maybe write some sweet comments in our code.
+### Maybe write some comments in our code.
 ### We might even write tests!
 
 ---
 
 ### ~~We could live with this.~~
-### ~~Most of us **do** live with this.~~
+### ~~Most of us do live with this.~~
 ### ~~We just communicate the rules to everyone.~~
 ### ~~Remember to tell the new guy.~~
-### ~~Maybe write some sweet comments in our code.~~
+### ~~Maybe write some comments in our code.~~
 ### ~~We might even write tests!~~
 
 ---
 
-**type system** + **compiler** help make **invariants**
+Leverage the compiler to
+## enforce our business rules
+
+---
+
+Tests are good
 
 ![Sarah Connor](http://i.imgur.com/JNTncdq.png)
 
-# impossible
+# impossible is better
 
 ---
 
 ### ✅ Null / undefined
 ### ✅ Exceptions
-### Invariants
+### ✅ Invariants
 
 ---
+
+Host of tools for improving your code
 
 
 | 💥 | ✅ |
@@ -1723,8 +1804,8 @@ type alias Contact =
 | exceptions | `Result error value` |
 | invariants | types + compiler |
 | side effects | `Cmd msg` |
-| mutable shared state | all data immutable |
 | mutating the dom manually | virtual dom |
+| mutable shared state | all data immutable |
 | state was spread out   | centralized state  |
 | multidirectional data flow  | unidirectional data flow  |
 | silent type errors  | strong type system  |
@@ -1741,23 +1822,57 @@ type alias Contact =
 
 ---
 
-TODO:
-
 Installing and getting going
 - `npm i -g elm`
-- `mkdir my-proj && cd py-proj`
+- `mkdir my-proj && cd my-proj`
 - `elm package install`
 - `atom Main.elm`
 
-Elm package manager
-- enforced semantic versioning
-- diff versions
+---
 
-Elm packages
+## Elm package manager
+
+> No user will ever get a breaking API change in a patch version.
+
+### enforced semantic versioning
+
+```
+elm package diff elm-lang/core 3.0.0 4.0.0
+```
+
+
+
+---
+
+### Come back Monday
+compiler helps you pick up right where you left off
+### interruptions?
+plates stay spinning
+
+---
+
+### "Compilers as Therapists,
+### or Why Elm is Good for ADHD"
+Luke Westby
+
+https://www.youtube.com/watch?v=wpYFTG-uViE
+
+---
 
 Timeline (compared to python)
 
-.....
+![Imgur](http://i.imgur.com/O7f3nQ1.png)
+
+---
+
+Things I didn't have time for (but we can talk about):
+
+- JS interop (the safe way)
+- Integrate with existing projects
+  - Backbone --> React
+  - React --> Elm
+  - integration with redux
+- Use for just a portion of your web application (grow from there)
 
 ---
 
@@ -1784,3 +1899,9 @@ Timeline (compared to python)
 # Links
 
 I'll be adding these soon.....
+
+---
+
+# FIN
+
+comments or questions?
