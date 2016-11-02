@@ -83,9 +83,7 @@ var pluralize = (singular, plural, quantity) =>  {
 console.log(pluralize("goose", "geese", "1")); // <-- WRONG TYPE
 ```
 
-???
-
-No error at all this time, even at runtime. Your program is just wrong.
+Note: No error at all this time, even at runtime. Your program is just wrong.
 
 ---
 
@@ -104,6 +102,4 @@ main =
   text (pluralize "goose" "geese" "1")
 ```
 
-???
-
-Elm checks your entire program for integrity before it's ever run.
+Note: Elm checks your entire program for integrity before it's ever run.

@@ -1477,80 +1477,6 @@ of an
 
 ---
 
-Another Example
-
-```elm
-type ConnectionState
-  = Connecting
-  | Connected
-  | Disconnected
-
-type alias ConnectionInfo =
-  { state : ConnectionState
-  , serverAddress : String
-  , lastPingTime : Maybe Time
-  , lastPingId : Maybe Int
-  , sessionId : Maybe String
-  , whenInitiated : Maybe Time
-  , whenDisconnected : Maybe Time
-  }
-```
-
----
-
-### Invariants
-
-- if you have a `lastPingTime`, you should also have a `lastPingId`
-- if you don’t have a `lastPingTime`, you should not have a `lastPingId`
-- you should only have a `sessionId` when you’re connected
-- `whenInitiated` - only makes sense to keep that if you’re in the process of connecting (used for retries)
-- `whenDisconnected` - only makes sense if you’re disconnected
-
----
-
-There’s nothing about this type, that helps you in enforcing the invariants.
-
-```elm
-type ConnectionState
-  = Connecting
-  | Connected
-  | Disconnected
-
-type alias ConnectionInfo =
-  { state : ConnectionState
-  , serverAddress : String
-  , lastPingTime : Maybe Time
-  , lastPingId : Maybe Int
-  , sessionId : Maybe String
-  , whenInitiated : Maybe Time
-  , whenDisconnected : Maybe Time
-  }
-```
-
----
-
-No illegal states!
-
-```elm
-type ConnectionState
-  = Connecting Time              -- initiation time
-  | Connected String (Int, Time) -- lastPingId, lastPingTime
-  | Disconnected Time            -- disconnection time
-
-type alias ConnectionInfo =
-  { state : ConnectionState -- Connecting | Connected | Disconnected
-  , serverAddress : String
-  }
-```
-
-1. Server address should exist regardless of connection state
-1. Segregated the values for individual cases:
-  - Connecting - when initiated
-  - Disconnected - when disconnected
-  - Connected - ping time, ping ID bound together in a tuple
-
----
-
 When you start looking you start to
 ### notice **invariants**
 all over your code
@@ -1897,6 +1823,9 @@ Things I didn't have time for (but we can talk about):
 <!-- .slide: data-background="#FBB917" -->
 <!-- .slide: data-transition="default" -->
 # Links
+
+Join FCIP on Slack!
+- http://fcip-slack.herokuapp.com/
 
 I'll be adding these soon.....
 
