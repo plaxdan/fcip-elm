@@ -5,6 +5,12 @@ import Html.App exposing (beginnerProgram)
 import Html.Events exposing (onClick)
 
 
+type Msg
+    = Increment
+    | Decrement
+    | Double
+
+
 pluralize singular plural quantity =
     if quantity == 1 then
         singular
@@ -26,16 +32,21 @@ main =
 
 view model =
     div []
-        [ button [ onClick "decrement" ] [ text "-" ]
+        [ button [ onClick Decrement ] [ text "-" ]
         , div [] [ text (displayText model) ]
-        , button [ onClick "increment" ] [ text "+" ]
+        , button [ onClick Increment ] [ text "+" ]
+        , button [ onClick Double ] [ text "double" ]
+        , text ("model is " ++ (toString model))
         ]
 
 
 update msg model =
-    if msg == "increment" then
-        model + 1
-    else if msg == "decrement" then
-        model - 1
-    else
-        model
+    case msg of
+        Increment ->
+            model + 1
+
+        Decrement ->
+            model - 1
+
+        Double ->
+            model * 2
