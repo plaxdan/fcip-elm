@@ -6,6 +6,12 @@ revealOptions:
 
 # An Exploration of Elm
 
+_Daniel Walker, November, 2016_
+
+for [Fort Collins Internet Professionals](www.meetup.com/goFCIP/events/234942930/)
+
+_- [watch video here](https://drive.google.com/open?id=0Bw_7Id9ISz8GZVQ1bXAzQmxnS1E) -_
+
 ---
 
 <!-- .slide: data-background="#FBB917" -->
@@ -1821,6 +1827,7 @@ Things I didn't have time for (but we can talk about):
 ---
 
 # People
+- Evan Czaplicki (Elm creator) [@czaplic](https://twitter.com/czaplic)
 - Kris Jenkins (London) [@krisajenkins](https://twitter.com/krisajenkins)
 - Richard Feldman (NoRedInk) [@rtfeldman](https://twitter.com/rtfeldman)
 - Simon Peyton Jones (Microsoft Research) [Google him](https://www.google.com/search?q=simon+peyton+jones)
@@ -1850,6 +1857,7 @@ Things I didn't have time for (but we can talk about):
 Scott Wlaschin _(F#)_
 - [The Wrong Abstraction](http://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction) - Sandi Metz
 - [Effective ML (Vimeo)](https://vimeo.com/14313378#t=1119s) - Yaron Minksy
+- [Compilers as Therapists](https://www.youtube.com/watch?v=wpYFTG-uViE) - Luke Westby
 
 ---
 
