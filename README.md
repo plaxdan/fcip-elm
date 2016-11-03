@@ -1791,6 +1791,24 @@ Timeline (compared to python)
 
 ---
 
+### "Just do a good job"
+
+\- Advice to Evan Czaplicki, _Elm's creator_, from Guido van Rossum, _Python's creator_.
+
+---
+
+### At compile time
+
+- It is impossible to mutate data
+- It is impossible to not handle "null/undefined"
+- It is impossible to not to handle exceptions
+- It is impossible to have runtime type errors
+- It is impossible to write an impure function
+- It is impossible to mix side effects with other logic
+- It is impossible to not handle all cases of a union type
+
+---
+
 Things I didn't have time for (but we can talk about):
 
 - JS interop (the safe way)
@@ -1802,8 +1820,6 @@ Things I didn't have time for (but we can talk about):
 
 ---
 
-<!-- .slide: data-background="#FBB917" -->
-<!-- .slide: data-transition="default" -->
 # People
 - Kris Jenkins (London) [@krisajenkins](https://twitter.com/krisajenkins)
 - Richard Feldman (NoRedInk) [@rtfeldman](https://twitter.com/rtfeldman)
@@ -1812,22 +1828,28 @@ Things I didn't have time for (but we can talk about):
 
 ---
 
-<!-- .slide: data-background="#FBB917" -->
-<!-- .slide: data-transition="default" -->
 # Tools
-- Elm: http://elm-lang.org
-- Markdown presentation: https://github.com/webpro/reveal-md
+- [elm-format](https://github.com/avh4/elm-format) - code formatter
+- [elm-oracle](https://github.com/ElmCast/elm-oracle) - auto-completion
+- [Reveal JS](http://lab.hakim.se/reveal-js/#/) - Node-based presentation tool
+- [Reveal-MD](https://github.com/webpro/reveal-md) - Reveal JS + Markdown on the command line
+- https://atom.io/packages/elm-format
+- https://atom.io/packages/language-elm
+- https://atom.io/packages/linter-elm-make
 
 ---
 
-<!-- .slide: data-background="#FBB917" -->
-<!-- .slide: data-transition="default" -->
-# Links
+## Links
 
-Join FCIP on Slack!
-- http://fcip-slack.herokuapp.com/
-
-I'll be adding these soon.....
+- [Join FCIP on Slack!](http://fcip-slack.herokuapp.com/)
+- [Original thesis on Elm](http://elm-lang.org/papers/concurrent-frp.pdf) - Evan Czaplicki
+- [What is Functional Programming](http://blog.jenkster.com/2015/12/what-is-functional-programming.html) - Kris Jenkins
+- [Haskell is Useless](https://www.youtube.com/watch?v=iSmkqocn0oQ) - Simon Peyton Jones
+- [A Tool for Thought](http://swannodette.github.io/2016/06/03/tools-for-thought) - David Nolan
+- [Designing with types: Making illegal states unrepresentable ](https://fsharpforfunandprofit.com/posts/designing-with-types-making-illegal-states-unrepresentable/) -
+Scott Wlaschin _(F#)_
+- [The Wrong Abstraction](http://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction) - Sandi Metz
+- [Effective ML (Vimeo)](https://vimeo.com/14313378#t=1119s) - Yaron Minksy
 
 ---
 
