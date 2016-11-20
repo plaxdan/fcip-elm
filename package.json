@@ -1,0 +1,22 @@
+{
+  "name": "fcip-elm",
+  "version": "1.0.0",
+  "description": "Introduction to Elm",
+  "main": "index.js",
+  "scripts": {
+    "start": "reveal-md README.md --theme solarized --highlightTheme github"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plaxdan/fcip-elm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/plaxdan/fcip-elm/issues"
+  },
+  "homepage": "https://github.com/plaxdan/fcip-elm#readme",
+  "devDependencies": {
+    "reveal-md": "0.0.31"
+  }
+}

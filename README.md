@@ -6,9 +6,10 @@ revealOptions:
 
 # An Exploration of Elm
 
-_Daniel Walker, November, 2016_
+_Daniel Walker, December, 2016_
 
-for [Fort Collins Internet Professionals](www.meetup.com/goFCIP/events/234942930/)
+# TODO: update meetup URL
+for [Fort Collins Coders](www.meetup.com/.../)
 
 _- [watch video here](https://drive.google.com/open?id=0Bw_7Id9ISz8GZVQ1bXAzQmxnS1E) -_
 
@@ -891,18 +892,6 @@ The **good practices** that we're seeing convergence on in JS land, are inescapa
 
 ---
 
-TODO: maybe kill?
-
-| 💥 Early JS | Recent JS  | React | Elm
-|---|---|---|
-| Mutating the DOM manually   | Virtual DOM  | React |  Elm |
-| State was spread out   | Now it's centralized  | Redux | Elm |
-| Multi-directional data flow  | Uni-directional data flow | Redux |  Elm |
-| Mutable shared state  | Immutable shared state  | Immutable.js | Elm |
-| Silent type errors  | Type checking UI props  | PropTypes/Flow | Elm
-
----
-
 JS Frameworks are now Emulating Elm
 
 - http://redux.js.org/
@@ -1221,28 +1210,10 @@ But there are many other hazards for our programs...
 
 ---
 
-But there are many other hazards for our programs...
-
-### Null / undefined
-
----
-
-But there are many other hazards for our programs...
-
-### Null / undefined
-### Exceptions
-
----
-
-But there are many other hazards for our programs...
-
-### Null / undefined
-### Exceptions
-### Invariants
-
----
-
-As you probably guessed, these are also handled by the type system.
+Elm lifts some of the most common
+# PITFALLS
+into its
+# type system.
 
 ---
 
@@ -1365,12 +1336,6 @@ An **entire category** of
 ![Sarah Connor](http://i.imgur.com/JNTncdq.png)
 
 ...is wiped from existence.
-
----
-
-### ✅ Null / undefined
-### Exceptions
-### Invariants
 
 ---
 
@@ -1718,12 +1683,6 @@ Tests are good
 ![Sarah Connor](http://i.imgur.com/JNTncdq.png)
 
 # impossible is better
-
----
-
-### ✅ Null / undefined
-### ✅ Exceptions
-### ✅ Invariants
 
 ---
 
