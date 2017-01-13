@@ -1622,7 +1622,7 @@ dude =
 dude =
   { name = "Jeffrey Lebowski"
   , primaryContact = Email "el_duderino@yahoo.com"
-  , secondaryContact = Just "11304 Malibu Heights"
+  , secondaryContact = Just (Address "11304 Malibu Heights")
   }
 ```
 
