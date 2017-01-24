@@ -8,8 +8,7 @@ revealOptions:
 
 _Daniel Walker, December, 2016_
 
-# TODO: update meetup URL
-for [Fort Collins Coders](www.meetup.com/.../)
+for [Fort Collins Coders](https://www.meetup.com/Fort-Collins-Coders/events/237000850/)
 
 _- [watch video here](https://drive.google.com/open?id=0Bw_7Id9ISz8GZVQ1bXAzQmxnS1E) -_
 
