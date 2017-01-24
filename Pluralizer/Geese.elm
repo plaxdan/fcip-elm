@@ -1,7 +1,6 @@
 module Main exposing (..)
 
 import Html exposing (div, button, text)
-import Html.App exposing (beginnerProgram)
 import Html.Events exposing (onClick)
 
 
@@ -17,7 +16,7 @@ displayText model =
 
 
 main =
-    beginnerProgram { model = 1, view = view, update = update }
+    Html.beginnerProgram { model = 1, view = view, update = update }
 
 
 view model =

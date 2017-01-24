@@ -1,14 +1,13 @@
 module Main exposing (..)
 
 import Html exposing (Html)
-import Html.App as App
 import Svg exposing (..)
 import Svg.Attributes exposing (..)
 import Time exposing (Time, second)
 
 
 main =
-    App.program
+    Html.program
         { init = init
         , view = view
         , update = \msg model -> update (Debug.log "Msg" msg) (Debug.log "Model" model)
