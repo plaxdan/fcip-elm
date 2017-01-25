@@ -6,7 +6,7 @@ revealOptions:
 
 # JavaScript and Elm - A convergence of ideas
 
-_Daniel Walker, December, 2016_
+_Daniel Walker, January, 2017_
 
 for [Fort Collins Coders](https://www.meetup.com/Fort-Collins-Coders/events/237000850/)
 
