@@ -4,7 +4,7 @@ revealOptions:
     transition: 'fade'
 ---
 
-# An Exploration of Elm
+# JavaScript and Elm - A convergence of ideas
 
 _Daniel Walker, December, 2016_
 
